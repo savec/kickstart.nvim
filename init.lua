@@ -902,12 +902,11 @@ require('lazy').setup({
     },
     config = function(_, opts)
       -- for windows use zig compiler to build the treesitter (didn't work with mingw32 for me)
-      if vim.fn.has 'win32' == 0 then
+      if vim.fn.has 'win32' == 1 then
+        -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+        require('nvim-treesitter.install').compilers = { 'zig' }
         return
       end
-
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-      require('nvim-treesitter.install').compilers = { 'zig' }
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
